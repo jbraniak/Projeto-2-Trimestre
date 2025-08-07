@@ -1,0 +1,168 @@
+/* style.css */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Roboto+Mono&display=swap');
+
+:root {
+  --branco: #ffffff;
+  --roxo-principal: #6A0DAD;
+  --roxo-claro: #B57EDC;
+  --rosa-claro: #F8D7FF;
+  --verde: #00FF85;
+  --amarelo: #FAF408;
+  --vermelho: #E71B32;
+  --borda: #ffffff;
+  --roboto: 'Roboto', sans-serif;
+  --roboto-mono: 'Roboto Mono', monospace;
+  --cinza-fundo: #f9f9f9;
+}
+
+body {
+  background-color: var(--roxo-principal);
+  color: var(--branco);
+  font-family: var(--roboto);
+  margin: 0;
+  padding: 0;
+}
+
+.conteudo {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  border-radius: 20px;
+  background-color: var(--roxo-claro);
+  box-shadow: 0 0 20px rgba(0,0,0,0.2);
+}
+
+.conteudo-titulo {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.titulo-principal {
+  font-size: 32px;
+  font-family: var(--roboto-mono);
+}
+
+.titulo-secundario {
+  font-size: 18px;
+  color: var(--cinza-fundo);
+}
+
+.conteudo-senha {
+  background-color: var(--rosa-claro);
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+#campo-senha {
+  width: 80%;
+  padding: 10px;
+  font-size: 28px;
+  font-family: var(--roboto-mono);
+  border: none;
+  border-radius: 10px;
+  text-align: center;
+  background-color: #ffffffaa;
+  color: #333;
+}
+
+.parametro {
+  background-color: var(--rosa-claro);
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.parametro-titulo,
+.parametro-senha__titulo {
+  font-family: var(--roboto-mono);
+  margin-bottom: 10px;
+}
+
+.parametro-coluna__senha {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.parametro-senha {
+  text-align: center;
+}
+
+.parametro-senha-botoes {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+
+.parametro-senha__botao {
+  padding: 10px 20px;
+  font-size: 20px;
+  background-color: var(--roxo-principal);
+  border: none;
+  color: var(--branco);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.parametro-senha__texto {
+  font-size: 22px;
+  background-color: var(--branco);
+  color: var(--roxo-principal);
+  padding: 10px 20px;
+  border-radius: 8px;
+}
+
+.checkbox {
+  width: 18px;
+  height: 18px;
+  margin-right: 8px;
+}
+
+label {
+  font-size: 18px;
+  color: #333;
+}
+
+.barra {
+  background-color: #ddd;
+  height: 20px;
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.forca {
+  height: 100%;
+}
+
+.fraca {
+  background-color: var(--vermelho);
+  width: 25%;
+}
+
+.media {
+  background-color: var(--amarelo);
+  width: 50%;
+}
+
+.forte {
+  background-color: var(--verde);
+  width: 100%;
+}
+
+.parametro-senha-textos {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+@media screen and (min-width: 768px) {
+  .parametro-coluna__senha {
+    flex-direction: row;
+    justify-content: space-around;
+  }
+}
