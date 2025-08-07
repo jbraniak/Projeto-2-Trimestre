@@ -1,62 +1,51 @@
-/* main.js */
-const numeroSenha = document.querySelector('.parametro-senha__texto');
-let tamanhoSenha = 12;
-numeroSenha.textContent = tamanhoSenha;
+document.addEventListener("DOMContentLoaded", () => {
+  const campoSenha = document.getElementById("campo-senha");
+  const botoes = document.querySelectorAll(".parametro-senha__botao");
+  const tamanhoTexto = document.querySelector(".parametro-senha__texto");
+  let tamanho = 12;
 
-const letrasMaiusculas = 'ABCDEFGHIJKLMNOPQRSTUVXYWZ';
-const letrasMinusculas = 'abcdefghijklmnopqrstuvxywz';
-const numeros = '0123456789';
-const simbolos = '!@%*?';
+  botoes[0].addEventListener("click", () => {
+    if (tamanho > 1) tamanho--;
+    tamanhoTexto.textContent = tamanho;
+    gerarSenha();
+  });
 
-const botoes = document.querySelectorAll('.parametro-senha__botao');
-const campoSenha = document.querySelector('#campo-senha');
-const checkbox = document.querySelectorAll('.checkbox');
-const forcaSenha = document.querySelector('.forca');
+  botoes[1].addEventListener("click", () => {
+    tamanho++;
+    tamanhoTexto.textContent = tamanho;
+    gerarSenha();
+  });
 
-botoes[0].onclick = () => {
-  if (tamanhoSenha > 1) tamanhoSenha--;
-  numeroSenha.textContent = tamanhoSenha;
-  geraSenha();
-};
+  function gerarSenha() {
+    const maiusculas = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const minusculas = "abcdefghijklmnopqrstuvwxyz";
+    const numeros = "0123456789";
+    const simbolos = "!@#$%^&*()_+";
 
-botoes[1].onclick = () => {
-  if (tamanhoSenha < 20) tamanhoSenha++;
-  numeroSenha.textContent = tamanhoSenha;
-  geraSenha();
-};
+    let caracteres = "";
+    if (document.querySelector('input[name="maiusculo"]').checked) caracteres += maiusculas;
+    if (document.querySelector('input[name="minusculo"]').checked) caracteres += minusculas;
+    if (document.querySelector('input[name="numero"]').checked) caracteres += numeros;
+    if (document.querySelector('input[name="simbolo"]').checked) caracteres += simbolos;
 
-checkbox.forEach(cb => cb.onclick = geraSenha);
+    if (caracteres === "") {
+      campoSenha.value = "Selecione uma opção!";
+      return;
+    }
 
-function geraSenha() {
-  let alfabeto = '';
-  if (checkbox[0].checked) alfabeto += letrasMaiusculas;
-  if (checkbox[1].checked) alfabeto += letrasMinusculas;
-  if (checkbox[2].checked) alfabeto += numeros;
-  if (checkbox[3].checked) alfabeto += simbolos;
+    let senha = "";
+    for (let i = 0; i < tamanho; i++) {
+      senha += caracteres.charAt(Math.floor(Math.random() * caracteres.length));
+    }
 
-  let senha = '';
-  for (let i = 0; i < tamanhoSenha; i++) {
-    let index = Math.floor(Math.random() * alfabeto.length);
-    senha += alfabeto[index];
+    campoSenha.value = senha;
   }
 
-  campoSenha.value = senha;
-  classificaSenha(alfabeto.length);
-}
+  // Gerar senha inicial
+  gerarSenha();
 
-function classificaSenha(tamAlfabeto) {
-  let entropia = tamanhoSenha * Math.log2(tamAlfabeto);
-  forcaSenha.classList.remove('fraca', 'media', 'forte');
-  if (entropia > 57) {
-    forcaSenha.classList.add('forte');
-  } else if (entropia > 35) {
-    forcaSenha.classList.add('media');
-  } else {
-    forcaSenha.classList.add('fraca');
-  }
-
-  const valorEntropia = document.querySelector('.entropia');
-  valorEntropia.textContent = "Um computador pode levar até " + Math.floor(2 ** entropia / (100e6 * 60 * 60 * 24)) + " dias para descobrir essa senha.";
-}
-
-geraSenha();
+  // Atualiza senha ao mudar os checkboxes
+  document.querySelectorAll(".checkbox").forEach(checkbox => {
+    checkbox.addEventListener("change", gerarSenha);
+  });
+});
